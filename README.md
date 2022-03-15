@@ -7,7 +7,25 @@ A Quasar Framework app
 ```bash
 yarn
 ```
+## Install quasar cli
 
+```bash
+yarn global add @quasar/cli 
+npm install -g @quasar/cli
+
+```
+
+## Possible errors 
+
+```bash
+Watchpack Error (watcher): Error: ENOSPC: System limit for number of file watchers reached, 
+```
+## Recovery 
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+sudo sysctl --system
+```
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 
 ```bash
