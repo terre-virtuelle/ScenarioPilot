@@ -7,7 +7,6 @@
     </div>
     <div class="row  justify-end">
       <q-btn color="white" text-color="black" label="Reset" @click="resetScenario"/>
-      <q-btn color="white" text-color="black" label="Test"/>
     </div>
   </div>
 </template>

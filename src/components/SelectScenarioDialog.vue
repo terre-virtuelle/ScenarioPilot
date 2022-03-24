@@ -5,7 +5,7 @@
         <div class="text-h6">Sélectionner un scénario</div>
       </q-card-section>
 
-      <q-card-section v-if="scenarios.length > 1" class="q-pt-none">
+      <q-card-section v-if="scenarios.length > 0" class="q-pt-none">
         <q-list v-for="scenario in scenarios" :key="scenario.title" bordered separator>
           <q-item @click="selectScenario(scenario)"  clickable v-ripple>
             <q-item-section>
