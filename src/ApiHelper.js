@@ -2,7 +2,7 @@ import Axios from "axios";
 
 class ApiHelper {
   static  urlSmap2Navisu = 'http://localhost:3004/';
-  static  urlControl = 'http://93.90.200.21:3003/';
+  static  urlControl = 'http://93.90.200.21:8484/'+'http://93.90.200.21:3003/';
 
   static setHeader() {
     Axios.defaults.headers.common = {'Access-Control-Allow-Origin': '*'};
@@ -18,7 +18,7 @@ class ApiHelper {
     const time  = new Date().toISOString();
     return Axios({
       method: 'put',
-      url: ApiHelper.urlControl + 'control?cmd=read&origin=TV&path=scenarios/'+scenarioName+'/'+'&timestamp=' + time
+      url: ApiHelper.urlControl + 'control?cmd=read&origin=TV&path=scenarios/'+scenarioName+'&target='+ scenarioName +'.json&timestamp=' + time
     });
   }
 
@@ -26,7 +26,7 @@ class ApiHelper {
     const time  = new Date().toISOString();
     return Axios({
       method: 'put',
-      url: ApiHelper.urlControl + 'control?cmd=question&target='+startId+'&origin='+'TV'+'&timestamp=' + time
+      url: ApiHelper.urlControl + 'control?cmd=question&origin=TV&target='+startId+'&origin='+'TV'+'&timestamp=' + time
     });
   }
 
@@ -35,7 +35,7 @@ class ApiHelper {
    const time  = new Date().toISOString();
     return Axios({
       method: 'put',
-      url: ApiHelper.urlControl + 'control?cmd=start&target='+startId+'&origin='+'TV'+'&timestamp=' + time
+      url: ApiHelper.urlControl + 'control?cmd=start&target='+startId+ '&origin=TV&timestamp=' + time
     });
   }
 
