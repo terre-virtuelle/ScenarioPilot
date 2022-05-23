@@ -60,6 +60,8 @@ export default defineComponent({
 
     const selectScenario = async (scenario) => {
       scenarioSelected.value = scenario;
+      longitude.value = '';
+      lattitude.value = '';
       closeSelectScDialog();
       await ApiHelper.selectPilotScenario(scenario.fileName);
     }
