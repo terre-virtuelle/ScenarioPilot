@@ -29,27 +29,26 @@ export default {
   setup(props){
     const localScenario = ref({...props.scenarioSelected})
    const watchScenario = watch(() => props.scenarioSelected, (nVal) => {
-      console.log('props.isOpen  ',props.scenarioSelected)
-      localScenario.value = nVal
+      localScenario.value = nVal;
     });
     const activeQuestion = async (questionIdx) => {
-      await ApiHelper.activeQuestion('q'+questionIdx)
+      await ApiHelper.activeQuestion('q'+questionIdx);
     }
     const start = async (questionIdx) => {
-      await ApiHelper.startPilotScenario('start'+questionIdx)
+      await ApiHelper.startPilotScenario('start'+questionIdx);
     }
     const stop = async (questionIdx) => {
-      await ApiHelper.startPilotScenario('stop'+questionIdx)
+      await ApiHelper.startPilotScenario('stop'+questionIdx);
     }
     const setTrue = async (questionIdx) => {
-      await ApiHelper.setQuestionTrue('true'+questionIdx)
+      await ApiHelper.setQuestionTrue('true'+questionIdx);
     }
     const setFalse = async (questionIdx) => {
-      await ApiHelper.setQuestionfalse('false'+questionIdx)
+      await ApiHelper.setQuestionfalse('false'+questionIdx);
     }
     const activeReponse = async (questionIdx) => {
-      localScenario.value.questions[questionIdx-1].isDisabled = true
-      await ApiHelper.activeReponse('r'+questionIdx)
+      localScenario.value.questions[questionIdx-1].isDisabled = true;
+      await ApiHelper.activeReponse('r'+questionIdx);
     }
     const resetScenario = async () => {
       localScenario.value.questions = localScenario.value.questions.map((question) => {

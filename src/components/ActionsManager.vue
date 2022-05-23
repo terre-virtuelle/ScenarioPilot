@@ -35,7 +35,7 @@ export default defineComponent ( {
   setup() {
     let selectScDialogIsOpen = ref(false);
     const scenarios = ref([]);
-    const scenarioSelected = ref({})
+    const scenarioSelected = ref({});
 
     const openSelectScDialog = async () => {
       const res = await ApiHelper.getScenarios();
@@ -49,7 +49,7 @@ export default defineComponent ( {
     const selectScenario = async (scenario) => {
       scenarioSelected.value = scenario;
       closeSelectScDialog();
-      await ApiHelper.selectPilotScenario(scenario.fileName)
+      await ApiHelper.selectPilotScenario(scenario.fileName);
     }
     return {selectScDialogIsOpen, scenarios, scenarioSelected, openSelectScDialog, closeSelectScDialog,selectScenario}
   }

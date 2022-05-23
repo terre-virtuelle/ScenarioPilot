@@ -41,14 +41,13 @@ export default defineComponent( {
   setup(props, { emit }){
     let localIsOpen = ref(props.isOpen)
     watch(() => props.isOpen, (nVal) => {
-      console.log('props.isOpen  ',props.isOpen)
-      localIsOpen = nVal
+      localIsOpen = nVal;
     });
     const closeDialog = () => {
-      emit('closeSelectScenarioDialog')
+      emit('closeSelectScenarioDialog');
     }
     const selectScenario = (scenario) => {
-      emit('selectScenario',scenario)
+      emit('selectScenario',scenario);
     }
 
     return {localIsOpen,selectScenario,closeDialog}
