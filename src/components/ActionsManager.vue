@@ -1,12 +1,21 @@
 <template>
   <div>
     <div class="row">
-      <div v-if="Object.keys(scenarioSelected).length >= 1">
-        <p>Scenario titre : {{ scenarioSelected.title }} </p>
-        <p>Scenario nom de fichier : {{ scenarioSelected.fileName }} </p>
+      <div v-if="Object.keys(scenarioSelected).length >= 1" class="col-8">
+        <div class="row">
+          <div class="col-6">
+            <p>Scenario titre : {{ scenarioSelected.title }} </p>
+            <p>Scenario nom de fichier : {{ scenarioSelected.fileName }} </p>
+          </div>
+          <div class="col-6">
+            <q-input v-model="longitude" dense label="Longitude"/>
+            <q-input v-model="lattitude" dense label="Lattitude"/>
+          </div>
+        </div>
       </div>
-      <div>
-        <q-btn v-if="Object.keys(scenarioSelected).length > 0" color="white" text-color="black" label="Changer de scenario" @click="openSelectScDialog"/>
+      <div class="col-4">
+        <q-btn v-if="Object.keys(scenarioSelected).length > 0" color="white" text-color="black"
+               label="Changer de scenario" @click="openSelectScDialog"/>
         <q-btn v-else color="white" text-color="black" label="Selectionner un scenario" @click="openSelectScDialog"/>
         <SelectScenarioDialog v-if="selectScDialogIsOpen" :isOpen="selectScDialogIsOpen" :scenarios="scenarios"
                               @closeSelectScenarioDialog="closeSelectScDialog" @selectScenario="selectScenario"/>
@@ -14,7 +23,7 @@
     </div>
     <div>
       <q-space/>
-      <ScenarioActions :scenarioSelected="scenarioSelected" />
+      <ScenarioActions :scenarioSelected="scenarioSelected" @resetLonLat="resetLonLat"/>
     </div>
     <q-space/>
 
@@ -23,11 +32,11 @@
 
 <script>
 import SelectScenarioDialog from "components/SelectScenarioDialog";
-import {ref , defineComponent} from "vue";
+import {ref, defineComponent} from "vue";
 import ApiHelper from "src/ApiHelper";
 import ScenarioActions from "components/ScenarioActions";
 
-export default defineComponent ( {
+export default defineComponent({
   name: "ActionsManager",
   components: {
     ScenarioActions, SelectScenarioDialog
@@ -36,6 +45,9 @@ export default defineComponent ( {
     let selectScDialogIsOpen = ref(false);
     const scenarios = ref([]);
     const scenarioSelected = ref({});
+    const longitude = ref('');
+    const lattitude = ref('');
+
 
     const openSelectScDialog = async () => {
       const res = await ApiHelper.getScenarios();
@@ -51,7 +63,21 @@ export default defineComponent ( {
       closeSelectScDialog();
       await ApiHelper.selectPilotScenario(scenario.fileName);
     }
-    return {selectScDialogIsOpen, scenarios, scenarioSelected, openSelectScDialog, closeSelectScDialog,selectScenario}
+    const resetLonLat = () => {
+      lattitude.value = '';
+      longitude.value = '';
+    }
+    return {
+      selectScDialogIsOpen,
+      scenarios,
+      scenarioSelected,
+      longitude,
+      lattitude,
+      openSelectScDialog,
+      closeSelectScDialog,
+      selectScenario,
+      resetLonLat
+    }
   }
 })
 </script>

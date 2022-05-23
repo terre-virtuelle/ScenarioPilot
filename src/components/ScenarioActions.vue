@@ -26,7 +26,7 @@ export default {
       type:Object
     }
   },
-  setup(props){
+  setup(props, { emit }){
     const localScenario = ref({...props.scenarioSelected})
    const watchScenario = watch(() => props.scenarioSelected, (nVal) => {
       localScenario.value = nVal;
@@ -49,12 +49,14 @@ export default {
     const activeReponse = async (questionIdx) => {
       localScenario.value.questions[questionIdx-1].isDisabled = true;
       await ApiHelper.activeReponse('r'+questionIdx);
+      emit('resetLonLat');
     }
     const resetScenario = async () => {
       localScenario.value.questions = localScenario.value.questions.map((question) => {
         question.isDisabled = false;
         return question;
-      })
+      });
+      emit('resetLonLat');
     }
     return {
       localScenario,activeQuestion,start,stop,setTrue,setFalse,activeReponse,resetScenario,watchScenario

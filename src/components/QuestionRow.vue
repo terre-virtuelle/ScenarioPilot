@@ -6,19 +6,19 @@
              @click="activeQuestion((idx + 1))"/>
     </div>
     <div class="col-2">
-      <q-btn color="green" :label="'Start ' + (questionIdx + 1)" class="question-btn" @click="start()"/>
+      <q-btn color="green" :label="'Start ' + (questionIdx + 1)" class="question-btn" :disable="question.isDisabled"  @click="start()"/>
     </div>
     <div class="col-2">
-      <q-btn color="red" label="Stop" class="question-btn" @click="stop()"/>
+      <q-btn color="red" label="Stop" class="question-btn" :disable="question.isDisabled" @click="stop()"/>
     </div>
     <div class="col-2">
-      <q-btn color="green" label="True" class="question-btn" @click="setTrue()"/>
+      <q-btn color="green" label="True" class="question-btn" :disable="question.isDisabled" @click="setTrue()"/>
     </div>
     <div class="col-2">
-      <q-btn color="red" label="False" class="question-btn" strech @click="setFalse()"/>
+      <q-btn color="red" label="False" class="question-btn" :disable="question.isDisabled"  @click="setFalse()"/>
     </div>
     <div class="col-2">
-      <q-btn color="white" text-color="black" :label="'Réponse '+(questionIdx + 1)" class="question-btn"
+      <q-btn color="white" text-color="black" :label="'Réponse '+(questionIdx + 1)" class="question-btn" :disable="question.isDisabled"
              @click="activeReponse()"/>
     </div>
   </div>
