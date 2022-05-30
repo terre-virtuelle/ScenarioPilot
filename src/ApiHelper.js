@@ -71,6 +71,14 @@ class ApiHelper {
     });
   }
 
+  static sendCoordinates(qId,lat,long) {
+    const time  = new Date().toISOString();
+    return Axios({
+      method: 'get',
+      url: ApiHelper.urlControl + 'control?cmd=response&target='+qId+'&origin='+'TV'+'&timestamp=' + time + '&latitude='+lat+'&longitude='+long
+    });
+  }
+
 
 
 

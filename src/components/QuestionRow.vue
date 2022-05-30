@@ -3,7 +3,7 @@
     <div class="col-2">
       <q-btn color="white" text-color="black" class="question-btn" :disable="question.isDisabled"
              :label="'Question ' + (questionIdx + 1)"
-             @click="activeQuestion((idx + 1))"/>
+             @click="activeQuestion((questionIdx + 1))"/>
     </div>
     <div class="col-2">
       <q-btn color="green" :label="'Start ' + (questionIdx + 1)" class="question-btn" :disable="question.isDisabled"  @click="start()"/>

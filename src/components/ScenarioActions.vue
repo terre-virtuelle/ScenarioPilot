@@ -31,7 +31,10 @@ export default {
    const watchScenario = watch(() => props.scenarioSelected, (nVal) => {
       localScenario.value = nVal;
     });
+    let activeQuestionId = null;
     const activeQuestion = async (questionIdx) => {
+      activeQuestionId = questionIdx;
+      console.log('activeQuestionId.value   ',activeQuestionId );
       await ApiHelper.activeQuestion('q'+questionIdx);
     }
     const start = async (questionIdx) => {
@@ -49,7 +52,6 @@ export default {
     const activeReponse = async (questionIdx) => {
       localScenario.value.questions[questionIdx-1].isDisabled = true;
       await ApiHelper.activeReponse('r'+questionIdx);
-      emit('resetLonLat');
     }
     const resetScenario = async () => {
       localScenario.value.questions = localScenario.value.questions.map((question) => {
@@ -59,7 +61,7 @@ export default {
       emit('resetLonLat');
     }
     return {
-      localScenario,activeQuestion,start,stop,setTrue,setFalse,activeReponse,resetScenario,watchScenario
+      localScenario,activeQuestionId,activeQuestion,start,stop,setTrue,setFalse,activeReponse,resetScenario,watchScenario
     }
   }
 

@@ -10,6 +10,8 @@
           <div class="col-6">
             <q-input v-model="longitude" dense label="Longitude"/>
             <q-input v-model="lattitude" dense label="Lattitude"/>
+            <q-btn color="white" text-color="black"
+                   label="Envoyer les coordonnées" @click="sendCoordinates"/>
           </div>
         </div>
       </div>
@@ -23,7 +25,7 @@
     </div>
     <div>
       <q-space/>
-      <ScenarioActions :scenarioSelected="scenarioSelected" @resetLonLat="resetLonLat"/>
+      <ScenarioActions :scenarioSelected="scenarioSelected" @resetLonLat="resetLonLat" ref="scAction"/>
     </div>
     <q-space/>
 
@@ -48,6 +50,8 @@ export default defineComponent({
     const longitude = ref('');
     const lattitude = ref('');
 
+    const scAction = ref(null)
+
 
     const openSelectScDialog = async () => {
       const res = await ApiHelper.getScenarios();
@@ -69,8 +73,12 @@ export default defineComponent({
       lattitude.value = '';
       longitude.value = '';
     }
+    const sendCoordinates = async () => {
+      await ApiHelper.sendCoordinates(scAction.value.activeQuestionId, lattitude, longitude);
+    }
     return {
       selectScDialogIsOpen,
+      scAction,
       scenarios,
       scenarioSelected,
       longitude,
@@ -78,7 +86,8 @@ export default defineComponent({
       openSelectScDialog,
       closeSelectScDialog,
       selectScenario,
-      resetLonLat
+      resetLonLat,
+      sendCoordinates
     }
   }
 })
