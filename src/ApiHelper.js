@@ -17,15 +17,15 @@ class ApiHelper {
   static selectPilotScenario(scenarioName) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
-      url: ApiHelper.urlControl + 'control?cmd=read&origin=TV&path=scenarios/'+scenarioName+'&target='+ scenarioName +'.json&timestamp=' + time
+      method: 'put',
+      url: ApiHelper.urlControl + 'read?cmd=scenario&origin=TV+&path=scenarios/'+scenarioName+'&target='+ scenarioName +'.json&timestamp=' + time
     });
   }
 
   static activeQuestion(startId) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=question&origin=TV&target='+startId+'&origin='+'TV'+'&timestamp=' + time
     });
   }
@@ -34,7 +34,7 @@ class ApiHelper {
   static startPilotScenario(startId) {
    const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=start&target='+startId+ '&origin=TV&timestamp=' + time
     });
   }
@@ -42,7 +42,7 @@ class ApiHelper {
   static stopPilotScenario(stopId) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=stop&target='+stopId+'&origin='+'TV'+'&timestamp=' + time
     });
   }
@@ -50,7 +50,7 @@ class ApiHelper {
   static setQuestionTrue(trueId) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=validate&target='+trueId+'&origin='+'TV'+'&timestamp=' + time
     });
   }
@@ -58,7 +58,7 @@ class ApiHelper {
   static setQuestionfalse(falseId) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=validate&target='+falseId+'&origin='+'TV'+'&timestamp=' + time
     });
   }
@@ -66,7 +66,7 @@ class ApiHelper {
   static activeReponse(falseId) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=response&target='+falseId+'&origin='+'TV'+'&timestamp=' + time
     });
   }
@@ -74,7 +74,7 @@ class ApiHelper {
   static sendCoordinates(qId,lat,long) {
     const time  = new Date().toISOString();
     return Axios({
-      method: 'get',
+      method: 'put',
       url: ApiHelper.urlControl + 'control?cmd=response&target='+qId+'&origin='+'TV'+'&timestamp=' + time + '&latitude='+lat+'&longitude='+long
     });
   }
