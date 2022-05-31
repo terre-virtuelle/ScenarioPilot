@@ -21,6 +21,8 @@
         <q-btn v-else color="white" text-color="black" label="Selectionner un scenario" @click="openSelectScDialog"/>
         <SelectScenarioDialog v-if="selectScDialogIsOpen" :isOpen="selectScDialogIsOpen" :scenarios="scenarios"
                               @closeSelectScenarioDialog="closeSelectScDialog" @selectScenario="selectScenario"/>
+        <q-btn v-if="Object.keys(scenarioSelected).length < 0" color="white" text-color="black" label="Charger un scenario" @click="loadScenario"/>
+
       </div>
     </div>
     <div>
@@ -64,9 +66,13 @@ export default defineComponent({
 
     const selectScenario = async (scenario) => {
       scenarioSelected.value = scenario;
-      longitude.value = '';
-      lattitude.value = '';
+      resetLonLat();
       closeSelectScDialog();
+      await ApiHelper.selectPilotScenario(scenario.fileName);
+    }
+    const loadScenario = async (scenario) => {
+      scenarioSelected.value = scenario;
+      resetLonLat();
       await ApiHelper.selectPilotScenario(scenario.fileName);
     }
     const resetLonLat = () => {
@@ -86,6 +92,7 @@ export default defineComponent({
       openSelectScDialog,
       closeSelectScDialog,
       selectScenario,
+      loadScenario,
       resetLonLat,
       sendCoordinates
     }
